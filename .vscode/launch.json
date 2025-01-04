@@ -1,0 +1,65 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "split_Img.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/utils/split/img_split.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--base-json", "${workspaceFolder}/utils/split/split_configs/ss_test.json",
+            ]
+        },
+        {
+            "name": "convert.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/utils/convert.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "plot_yolo_annotation.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/utils/plot_yolo_annotation.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "gen_train_config.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/utils/gen_train_config.py",
+            "console": "integratedTerminal",
+            "args": []
+        },
+        {
+            "name": "train.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/train.py",
+            "console": "integratedTerminal",
+            // args.add_argument('--epochs', type=int, default=50)
+            // args.add_argument('--batch', type=int, default=16)
+            // args.add_argument('--imgsz', type=int, default=800)
+            // args.add_argument('--data', type=str, default='config.yaml')
+            // args.add_argument('--weights', type=str, default='yolov8n.yaml')
+            // if args.usePretrained:
+            //     args.add_argument('--weights', type=str, help='Initial weights path')
+            // args.add_argument('--name', type=str, default='yolov8n_epochs50_batch16')
+            "args": [
+                "--epochs", "100",
+                "--batch", "4",
+                "--imgsz", "1024",
+                "--data", "./configs/DOTA/train_config.yaml",
+                "--weights", "./runs/detect/my_yolov8n_epochs50_batch16/weights/last.pt",
+                "--name", "my_DOTA_enhanced_yolov8n_epochs50_batch4"
+            ]
+        }
+    ]
+}
