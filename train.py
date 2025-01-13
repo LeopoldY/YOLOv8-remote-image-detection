@@ -3,7 +3,14 @@ import argparse
 
 def train(args):
     model = YOLO(args.weights)
-    results = model.train(data=args.data, epochs=args.epochs, batch=args.batch, imgsz=args.imgsz, name=args.name)
+    results = model.train(
+                    data=args.data, 
+                    epochs=args.epochs, 
+                    batch=args.batch, 
+                    imgsz=args.imgsz, 
+                    name=args.name,
+                    resume=args.resume
+                    )
 
 
 if __name__ == '__main__':
@@ -14,6 +21,7 @@ if __name__ == '__main__':
     args.add_argument('--data', type=str, default='config.yaml')
     args.add_argument('--weights', type=str, default='yolov8n.yaml', help='path to pretrained weights if training from pretrained')
     args.add_argument('--name', type=str)
+    args.add_argument('--resume', type=bool, default=False)
     args = args.parse_args()
 
     train(args)

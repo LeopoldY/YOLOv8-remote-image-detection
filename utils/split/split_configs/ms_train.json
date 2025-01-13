@@ -1,10 +1,10 @@
 {
   "nproc": 10,
   "img_dirs": [
-    "C:/Users/yangc/Developer/data/DOTA/Train/images"
+    "C:/Users/yangc/Developer/data/dota_small/train/images"
   ],
   "ann_dirs": [
-    "C:/Users/yangc/Developer/data/DOTA/Train/labelTxt/trainset_reclabelTxt"
+    "C:/Users/yangc/Developer/data/dota_small/train/labelTxt"
   ],
   "sizes": [
     1024
@@ -25,6 +25,6 @@
     116,
     124
   ],
-  "save_dir": "C:/Users/yangc/Developer/data/DOTA_1024_HBB/Train/",
+  "save_dir": "C:/Users/yangc/Developer/data/dota_small_1024/train/",
   "save_ext": ".png"
 }

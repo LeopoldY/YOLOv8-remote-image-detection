@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/utils/split/img_split.py",
             "console": "integratedTerminal",
             "args": [
-                "--base-json", "${workspaceFolder}/utils/split/split_configs/ss_test.json",
+                "--base-json", "${workspaceFolder}/utils/split/split_configs/ms_val.json",
             ]
         },
         {
@@ -44,22 +44,26 @@
             "request": "launch",
             "program": "${workspaceFolder}/train.py",
             "console": "integratedTerminal",
-            // args.add_argument('--epochs', type=int, default=50)
-            // args.add_argument('--batch', type=int, default=16)
-            // args.add_argument('--imgsz', type=int, default=800)
-            // args.add_argument('--data', type=str, default='config.yaml')
-            // args.add_argument('--weights', type=str, default='yolov8n.yaml')
-            // if args.usePretrained:
-            //     args.add_argument('--weights', type=str, help='Initial weights path')
-            // args.add_argument('--name', type=str, default='yolov8n_epochs50_batch16')
             "args": [
-                "--epochs", "100",
-                "--batch", "4",
+                "--epochs", "200",
+                "--batch", "2",
                 "--imgsz", "1024",
-                "--data", "./configs/DOTA/train_config.yaml",
-                "--weights", "./runs/detect/my_yolov8n_epochs50_batch16/weights/last.pt",
-                "--name", "my_DOTA_enhanced_yolov8n_epochs50_batch4"
+                "--data", "./cfgs/dota_small/train_config.yaml",
+                "--weights", "yolov8l-CotAttention.yaml",
+                "--name", "DOTA_small_yolov8l_epochs200_CoT_I",
+                "--resume", "False"
             ]
-        }
+        },
+        {
+            "name": "test.py",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/test.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--weights", "runs/detect/DOTA_yolov8s_epochs100_CoT/weights/best.pt",
+                "--task", "video",
+            ]
+        },
     ]
 }

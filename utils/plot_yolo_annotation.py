@@ -53,18 +53,14 @@ def plot_yolo_annotation(img_file, annot_file, class_dict=None):
 
 
 if __name__ == '__main__':
-    # Randomly select an image and its annotation file
-    root = 'C:/Users/yangc/Developer/data/DOTA_1024_HBB/train'
-    
+    root = r'C:/Users/yangc/Developer/data/dota_small_1024/train'
     ann_dir = os.path.join(root, 'labels')
-    # re-select if file is empty
-    while True:
-        ann_file = random.choice(os.listdir(ann_dir))
-        ann_path = os.path.join(ann_dir, ann_file)
-        if os.path.getsize(ann_path) > 0:
-            break
+    ann_files = [f for f in os.listdir(ann_dir) if os.path.getsize(os.path.join(ann_dir, f)) > 0]
 
-    img_path = ann_path.replace('labels', 'images').replace('.txt', '.png')
-    class_dict = pickle.load(open('./configs/DOTA/class_map.pkl', 'rb'))
-   
-    plot_yolo_annotation(img_path, ann_path, class_dict)
+    selected_files = random.sample(ann_files, 8)
+    class_dict = pickle.load(open('./cfgs/dota_small/class_map.pkl', 'rb'))
+
+    for ann_file in selected_files:
+        ann_path = os.path.join(ann_dir, ann_file)
+        img_path = ann_path.replace('labels', 'images').replace('.txt', '.png')
+        plot_yolo_annotation(img_path, ann_path, class_dict)

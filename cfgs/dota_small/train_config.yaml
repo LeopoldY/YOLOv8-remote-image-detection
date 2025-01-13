@@ -1,0 +1,19 @@
+names:
+  0: small-vehicle
+  1: large-vehicle
+  2: plane
+  3: ship
+  4: harbor
+  5: tennis-court
+  6: soccer-ball-field
+  7: ground-track-field
+  8: baseball-diamond
+  9: swimming-pool
+  10: roundabout
+  11: basketball-court
+  12: storage-tank
+  13: bridge
+  14: helicopter
+path: 
+train: C:/Users/yangc/Developer/data/dota_small_1024/train/
+val: C:/Users/yangc/Developer/data/dota_small_1024/val/

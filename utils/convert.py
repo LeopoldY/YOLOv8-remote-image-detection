@@ -8,13 +8,13 @@ DATA_PATH = r'C:/Users/yangc/Developer/data'
 import os
 from PIL import Image
 
-def get_dota_class_map(ann_dir, save_path='./configs/DOTA/class_map.pkl'):
+def get_dota_class_map(ann_dir, save_path):
     '''
     Get the class map for DOTA dataset
 
     Args:
         ann_dir (str): Path to the directory containing DOTA annotations
-
+        save_path (str): Path to the file to save the class
     Returns:
         dict: A dictionary mapping class names to class IDs
     '''
@@ -42,7 +42,7 @@ def get_dota_class_map(ann_dir, save_path='./configs/DOTA/class_map.pkl'):
     print('[INFO] Class map obtained!')
     return class_map
  
-def convert_dota_to_yolo(ann_dir: str, out_dir: str):
+def convert_dota_to_yolo(ann_dir: str, out_dir: str, map_dir: str):
     '''
     Convert DOTA annotations to YOLO format
 
@@ -53,7 +53,9 @@ def convert_dota_to_yolo(ann_dir: str, out_dir: str):
     if not os.path.exists(out_dir):
         print(f'[INFO] Creating output directory at {out_dir}')
         os.makedirs(out_dir)
-    label_map = get_dota_class_map(ann_dir)
+    else:
+        print(f'[INFO] Output directory already exists at {out_dir}')
+    label_map = get_dota_class_map(ann_dir, map_dir)
     
     print('[INFO] Converting annotations to YOLO format...')
     for filename in tqdm(os.listdir(ann_dir)):
@@ -99,9 +101,10 @@ def get_image_size(img_path):
         return img.size
 
 if __name__ == '__main__':
-    mode = 'Val'
-    ann_dir = os.path.join(DATA_PATH, 'DOTA_1024_HBB', mode, 'annfiles')
-    output_root = os.path.join(DATA_PATH, 'DOTA_1024_HBB', mode, 'labels')
+    mode = 'val'
+    ann_dir = os.path.join(DATA_PATH, 'dota_small_1024', mode, 'annfiles')
+    output_root = os.path.join(DATA_PATH, 'dota_small_1024', mode, 'labels')
 
-    convert_dota_to_yolo(ann_dir, output_root)
+    map_dir = r'./cfgs/dota_small/class_map.pkl'
 
+    convert_dota_to_yolo(ann_dir, output_root, map_dir=map_dir)

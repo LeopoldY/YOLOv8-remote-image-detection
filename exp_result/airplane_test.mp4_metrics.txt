@@ -1,0 +1,3 @@
+Average Frame Time: 11.61 ms
+Average FPS: 86.79
+Average Memory Usage: 86.62 MB

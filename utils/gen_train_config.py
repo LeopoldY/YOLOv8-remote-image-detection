@@ -6,7 +6,7 @@ import pickle
 
 from convert import get_dota_class_map
 
-def gen_train_config(train_root, save_path):
+def gen_train_config(train_root, save_path, map_path):
     '''
     Generate training configuration file for training the model.
 
@@ -20,7 +20,7 @@ def gen_train_config(train_root, save_path):
     '''
     # Get the class map
     ann_dir = os.path.join(train_root, 'annfiles')
-    class_map = get_dota_class_map(ann_dir, save_path='./configs/DOTA/class_map.pkl')
+    class_map = get_dota_class_map(ann_dir, map_path)
 
     # Generate the training configuration file
     # Swap keys and values in class_map
@@ -28,8 +28,8 @@ def gen_train_config(train_root, save_path):
     
     config = {
         'path': str(os.path.dirname(train_root)),  # Get parent directory of train_root
-        'train': '/Train/',
-        'val': '/Val/',
+        'train': '/train/',
+        'val': '/val/',
 
         'names': class_map_swapped,
     }
@@ -44,6 +44,7 @@ def gen_train_config(train_root, save_path):
 
 
 if __name__ == '__main__':
-    train_root = 'C:/Users/yangc/Developer/data/DOTA_1024_HBB/train'
-    save_path = './configs/DOTA/train_config.yaml'
-    gen_train_config(train_root, save_path)
+    train_root = 'C:/Users/yangc/Developer/data/dota_small_1024/train'
+    save_path = './cfgs/dota_small/train_config.yaml'
+    map_path = './cfgs/dota_small/class_map.pkl'
+    gen_train_config(train_root, save_path, map_path)
