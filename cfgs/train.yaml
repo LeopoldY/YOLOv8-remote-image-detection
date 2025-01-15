@@ -1,0 +1,8 @@
+epochs : 100
+batch : 4
+imgsz : 1024
+data : ./cfgs/DOTA/train_config.yaml
+weights : runs/detect/dota_yolov8s_epochs100_CoT_Improved/weights/last.pt
+name : dota_yolov8s_epochs100_CoT_Improved
+resume : True
+workers : 6

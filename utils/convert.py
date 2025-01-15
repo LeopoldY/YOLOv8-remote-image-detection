@@ -1,9 +1,8 @@
+import argparse
 import os
 import cv2
 from tqdm import tqdm
 import pickle
-
-DATA_PATH = r'C:/Users/yangc/Developer/data'
 
 import os
 from PIL import Image
@@ -82,6 +81,23 @@ def convert_dota_to_yolo(ann_dir: str, out_dir: str, map_dir: str):
                     width = (x3 - x1) / width
                     height = (y3 - y1) / height
 
+                    if x_center < 0:
+                        x_center = 0
+                    if y_center < 0:
+                        y_center = 0
+                    if x_center > 1:
+                        x_center = 1
+                    if y_center > 1:
+                        y_center = 1
+                    if width < 0:
+                        width = 0
+                    if height < 0:
+                        height = 0
+                    if width > 1:
+                        width = 1
+                    if height > 1:
+                        height = 1
+
                     # 将转换后的结果写入yolo格式文件
                     yolo_f.write(f"{label_map[class_name]} {x_center} {y_center} {width} {height}\n")
 
@@ -101,10 +117,19 @@ def get_image_size(img_path):
         return img.size
 
 if __name__ == '__main__':
-    mode = 'val'
-    ann_dir = os.path.join(DATA_PATH, 'dota_small_1024', mode, 'annfiles')
-    output_root = os.path.join(DATA_PATH, 'dota_small_1024', mode, 'labels')
+    args = argparse.ArgumentParser()
+    args.add_argument('--mode', type=str, default='train')
+    args.add_argument('--data_root', type=str)
+    args.add_argument('--dataset', type=str, default='dota_small_1024')
+    args.add_argument('--map_dir', type=str, default='./cfgs/dota_small/class_map.pkl')
+    args = args.parse_args()
 
-    map_dir = r'./cfgs/dota_small/class_map.pkl'
+    DATA_PATH = args.data_root
+    mode = args.mode
+    data_set = args.dataset
+    map_dir = args.map_dir
+
+    ann_dir = os.path.join(DATA_PATH, data_set, mode, 'annfiles')
+    output_root = os.path.join(DATA_PATH, data_set, mode, 'labels')
 
     convert_dota_to_yolo(ann_dir, output_root, map_dir=map_dir)

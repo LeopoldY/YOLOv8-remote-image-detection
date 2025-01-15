@@ -1,9 +1,11 @@
 {
   "nproc": 10,
   "img_dirs": [
-    "C:/Users/yangc/Developer/data/DOTA/Test/images"
+    "C:/Users/yangc/Developer/data/dota_small/test/images"
   ],
-  "ann_dirs": null,
+  "ann_dirs": [
+    "C:/Users/yangc/Developer/data/dota_small/test/labelTxt"
+  ],
   "sizes": [
     1024
   ],
@@ -23,6 +25,6 @@
     116,
     124
   ],
-  "save_dir": "C:/Users/yangc/Developer/data/DOTA_1024_HBB/Test/",
+  "save_dir": "C:/Users/yangc/Developer/data/dota_small_1024/test/",
   "save_ext": ".png"
 }

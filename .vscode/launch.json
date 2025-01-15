@@ -11,7 +11,7 @@
             "program": "${workspaceFolder}/utils/split/img_split.py",
             "console": "integratedTerminal",
             "args": [
-                "--base-json", "${workspaceFolder}/utils/split/split_configs/ms_val.json",
+                "--base-json", "${workspaceFolder}/utils/split/split_configs/ms_test.json",
             ]
         },
         {
@@ -20,7 +20,10 @@
             "request": "launch",
             "program": "${workspaceFolder}/utils/convert.py",
             "console": "integratedTerminal",
-            "args": []
+            "args": [
+                "--mode", "test",
+                "--data_root", "C:/Users/yangc/Developer/data/",
+            ]
         },
         {
             "name": "plot_yolo_annotation.py",
@@ -44,15 +47,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/train.py",
             "console": "integratedTerminal",
-            "args": [
-                "--epochs", "200",
-                "--batch", "2",
-                "--imgsz", "1024",
-                "--data", "./cfgs/dota_small/train_config.yaml",
-                "--weights", "yolov8l-CotAttention.yaml",
-                "--name", "DOTA_small_yolov8l_epochs200_CoT_I",
-                "--resume", "False"
-            ]
+            "args": []
         },
         {
             "name": "test.py",
@@ -60,10 +55,7 @@
             "request": "launch",
             "program": "${workspaceFolder}/test.py",
             "console": "integratedTerminal",
-            "args": [
-                "--weights", "runs/detect/DOTA_yolov8s_epochs100_CoT/weights/best.pt",
-                "--task", "video",
-            ]
+            "args": []
         },
     ]
 }
