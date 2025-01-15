@@ -2,17 +2,18 @@ import os
 import shutil
 import torch
 from tqdm import tqdm
+import yaml
 from ultralytics import YOLO
 import cv2
 import time
+import matplotlib.pyplot as plt
 
-import argparse
-
-def test(model: YOLO):
+def test(args):
     # Validating the 
-    res = model.val(data='test_config.yaml', imgsz=800, name='yolov8n_val_on_test')
+    model = YOLO(args['weights'])
+    res = model.val(data=args['data'], imgsz=args['imgsz'], name=args['name'])
 
-def test_on_video(model):
+def test_on_video(args):
     # Create exp_result directory if it doesn't exist
     os.makedirs('./exp_result', exist_ok=True)
     
@@ -22,6 +23,9 @@ def test_on_video(model):
         'fps_values': [],
         'memory_usage': []
     }
+
+    # Load model
+    model = YOLO(args['weights'], verbose=False)
     
     video_list = ['test_data/ships_test.mp4', 'test_data/airplane_test.mp4']
     for file in video_list:
@@ -71,16 +75,34 @@ def test_on_video(model):
     
     cv2.destroyAllWindows()
 
+def test_on_images(args):
+    # Create exp_result directory if it doesn't exist
+    os.makedirs('./exp_result', exist_ok=True)
+    
+    # Load model
+    model = YOLO(args['weights'], verbose=False)
+    
+    image_list = ['test_data/ship.jpg', 'test_data/airplane.jpg']
+    for file in image_list:
+        image = cv2.imread(file)
+        results = model.predict(source=image, imgsz=800, conf=0.5)
+        annotated_image = results[0].plot()
+        
+        cv2.imshow('Inference', annotated_image)
+        cv2.waitKey(0)
+        
+        cv2.destroyAllWindows()
+
 if __name__ == '__main__':
-    args = argparse.ArgumentParser()
-    args.add_argument('--weights', type=str, default='yolov8n.yaml', help='path to pretrained weights if training from pretrained')
-    args.add_argument('--task', type=str, default=False, help='whether to run inference on video and calculate metrics')
-    args = args.parse_args()
+    args = yaml.load(open(r'./cfgs/test.yaml', 'r'), Loader=yaml.FullLoader)
 
-    assert args.task in ['video', 'valset'], "Invalid metrics argument. Choose from 'video' or valset"
+    assert args['task'] in ['video', 'val', 'images'], "Invalid metrics argument. Choose from 'video' , 'val' or images"
 
-    model = YOLO(args.weights)
-    if args.task == 'video':
-        test_on_video(model)
-    elif args.task == 'valset':
-        test(model)
+    args['name'] = args['weights'].split('/')[2] + '_on_test'
+
+    if args['task'] == 'video':
+        test_on_video(args)
+    elif args['task'] == 'val':
+        test(args)
+    elif args['task'] == 'images':
+        test_on_images(args)     
