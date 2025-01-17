@@ -18,6 +18,7 @@ from multiprocessing import Manager, Pool
 import cv2
 import numpy as np
 from PIL import Image
+import yaml
 
 Image.MAX_IMAGE_PIXELS = None
 

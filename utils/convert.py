@@ -6,6 +6,7 @@ import pickle
 
 import os
 from PIL import Image
+import yaml
 
 def get_dota_class_map(ann_dir, save_path):
     '''
@@ -117,19 +118,20 @@ def get_image_size(img_path):
         return img.size
 
 if __name__ == '__main__':
-    args = argparse.ArgumentParser()
-    args.add_argument('--mode', type=str, default='train')
-    args.add_argument('--data_root', type=str)
-    args.add_argument('--dataset', type=str, default='dota_small_1024')
-    args.add_argument('--map_dir', type=str, default='./cfgs/dota_small/class_map.pkl')
-    args = args.parse_args()
+    args = yaml.load(open(r'./cfgs/convert.yaml', 'r'), Loader=yaml.FullLoader)
 
-    DATA_PATH = args.data_root
-    mode = args.mode
-    data_set = args.dataset
-    map_dir = args.map_dir
+    DATA_PATH = args['data_root']
+    mode = args['mode']
+    dataset = args['dataset']
+    map_dir = args['map_dir']
 
-    ann_dir = os.path.join(DATA_PATH, data_set, mode, 'annfiles')
-    output_root = os.path.join(DATA_PATH, data_set, mode, 'labels')
+    assert os.path.exists(DATA_PATH), "Invalid data path"
+    assert os.path.exists(map_dir), "Invalid map directory path"
+
+    ann_dir = os.path.join(DATA_PATH, dataset, mode, 'annfiles')
+    output_root = os.path.join(DATA_PATH, dataset, mode, 'labels')
+
+    assert os.path.exists(ann_dir), "Invalid annotation directory path"
+    assert os.path.exists(output_root), "Invalid output directory path"
 
     convert_dota_to_yolo(ann_dir, output_root, map_dir=map_dir)

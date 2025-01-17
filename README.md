@@ -27,9 +27,9 @@ python split_Img.py --base-json /utils/split/split_configs/ms_train.json
 ```bash
 python split_Img.py --base-json /utils/split/split_configs/ss_train.json
 ```
-3. Run the convert.py script to convert the labels to YOLO format. The script is in the `utils` folder. Remember to change the convert mode to `train` or `val` depending on the dataset you are converting.
+3. Run the convert.py script to convert the labels to YOLO format. The script is in the `utils` folder. Remember to change the convert mode in `cfgs/convert.yaml` to `train` or `val` depending on the dataset you are converting.
 ```bash
-python convert.py --mode train --data_root /path/to/dataset
+python convert.py
 ```
 4. Train the model using the following command:
 ```bash

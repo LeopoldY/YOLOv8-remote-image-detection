@@ -1,0 +1,3 @@
+mode : test
+data_root : C:/Users/yangc/Developer/data/
+dataset : dota_small_1024

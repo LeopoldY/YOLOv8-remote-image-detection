@@ -2,3 +2,5 @@
 /runs/
 /exp_result/
 .vscode/launch.json
+exp_result/airplane_test.mp4_metrics.txt
+exp_result/ships_test.mp4_metrics.txt

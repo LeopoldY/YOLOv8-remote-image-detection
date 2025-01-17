@@ -16,4 +16,4 @@ names:
   14: helicopter
 path: 
 train: 
-val: C:/Users/yangc/Developer/data/dota_small_1024/test/
+val: C:/Users/yangc/Developer/data/dota_small_1024/val/

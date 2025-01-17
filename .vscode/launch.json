@@ -5,57 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "split_Img.py",
+            "name": "Python: 当前文件",
             "type": "debugpy",
             "request": "launch",
-            "program": "${workspaceFolder}/utils/split/img_split.py",
             "console": "integratedTerminal",
+            "program": "${file}",
             "args": [
                 "--base-json", "${workspaceFolder}/utils/split/split_configs/ms_test.json",
             ]
-        },
-        {
-            "name": "convert.py",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/utils/convert.py",
-            "console": "integratedTerminal",
-            "args": [
-                "--mode", "test",
-                "--data_root", "C:/Users/yangc/Developer/data/",
-            ]
-        },
-        {
-            "name": "plot_yolo_annotation.py",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/utils/plot_yolo_annotation.py",
-            "console": "integratedTerminal",
-            "args": []
-        },
-        {
-            "name": "gen_train_config.py",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/utils/gen_train_config.py",
-            "console": "integratedTerminal",
-            "args": []
-        },
-        {
-            "name": "train.py",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/train.py",
-            "console": "integratedTerminal",
-            "args": []
-        },
-        {
-            "name": "test.py",
-            "type": "debugpy",
-            "request": "launch",
-            "program": "${workspaceFolder}/test.py",
-            "console": "integratedTerminal",
-            "args": []
-        },
+        }
     ]
 }
