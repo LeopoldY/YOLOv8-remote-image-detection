@@ -1,3 +1,4 @@
-/.vscode/
+.vscode/
 /runs/
 /exp_result/
+.vscode/launch.json
