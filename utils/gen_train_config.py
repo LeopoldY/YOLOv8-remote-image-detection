@@ -27,9 +27,9 @@ def gen_train_config(train_root, save_path, map_path):
     class_map_swapped = {v: k for k, v in class_map.items()}
     
     config = {
-        'path': str(os.path.dirname(train_root)),  # Get parent directory of train_root
-        'train': '/train/',
-        'val': '/val/',
+        'path': '',
+        'train': os.path.join(train_root, 'images/'),
+        'val': os.path.join(train_root, 'images/').replace('train', 'val'),
 
         'names': class_map_swapped,
     }

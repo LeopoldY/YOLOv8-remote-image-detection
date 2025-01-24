@@ -112,7 +112,7 @@ def test_on_images(args):
 if __name__ == '__main__':
     args = yaml.load(open(r'./cfgs/test.yaml', 'r'), Loader=yaml.FullLoader)
 
-    assert args['task'] in ['video', 'val', 'images'], "Invalid metrics argument. Choose from 'video' , 'val' or images"
+    assert args['task'] in ['video', 'val', 'image'], "Invalid metrics argument. Choose from 'video' , 'val' or image"
     assert os.path.exists(args['weights']), "Invalid weights path"
     assert os.path.exists(args['data']), "Invalid data path"
     assert os.path.exists(args['img_dir']), "Invalid image directory path"
@@ -123,5 +123,5 @@ if __name__ == '__main__':
         test_on_video(args)
     elif args['task'] == 'val':
         test(args)
-    elif args['task'] == 'images':
+    elif args['task'] == 'image':
         test_on_images(args)     

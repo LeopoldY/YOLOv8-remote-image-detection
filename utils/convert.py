@@ -8,39 +8,7 @@ import os
 from PIL import Image
 import yaml
 
-def get_dota_class_map(ann_dir, save_path):
-    '''
-    Get the class map for DOTA dataset
-
-    Args:
-        ann_dir (str): Path to the directory containing DOTA annotations
-        save_path (str): Path to the file to save the class
-    Returns:
-        dict: A dictionary mapping class names to class IDs
-    '''
-    class_map = {}
-    class_id = 0
-
-    if os.path.exists(save_path):
-        print('[INFO] Loading class map...')
-        with open(save_path, "rb") as f:
-            class_map = pickle.load(f)
-        print('[INFO] Class map loaded!')
-        return class_map
-
-    print('[INFO] Getting class map...')
-    for file in tqdm(os.listdir(ann_dir)):
-        with open(os.path.join(ann_dir, file), 'r') as f:
-            for line in f:
-                class_name = line.split(' ')[8]
-                if class_name not in class_map:
-                    class_map[class_name] = class_id
-                    class_id += 1
-    # save the class map to a file
-    with open(save_path, 'wb') as f:
-        pickle.dump(class_map, f)
-    print('[INFO] Class map obtained!')
-    return class_map
+from utils.class_map import *
  
 def convert_dota_to_yolo(ann_dir: str, out_dir: str, map_dir: str):
     '''
@@ -77,7 +45,7 @@ def convert_dota_to_yolo(ann_dir: str, out_dir: str, map_dir: str):
                     width, height = get_image_size(img_file)
 
                     # 计算yolo格式的中心点坐标和宽高
-                    x_center = (x1 + x3) / 2 / width
+                    x_center = (x1 + x3) / 2 / width  
                     y_center = (y1 + y3) / 2 / height
                     width = (x3 - x1) / width
                     height = (y3 - y1) / height

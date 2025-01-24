@@ -1,5 +1,5 @@
 weights : runs/detect/dota_small_yolov8s_epochs200_CoT_Improved/weights/best.pt
-task : val # video, image, val
+task : image # video, image, val
 data : ./cfgs/dota_small/test_config.yaml
 imgsz : 1024
 img_dir : C:/Users/yangc/Developer/data/dota_small/test/images
