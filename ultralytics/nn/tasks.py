@@ -10,6 +10,8 @@ from pathlib import Path
 import torch
 import torch.nn as nn
 
+from ultralytics.nn.backbone.SwinTransformer import PatchMerging, PatchEmbed, SwinStage
+from ultralytics.nn.backbone.mobileViT import MobileViTBlock
 from ultralytics.nn.Attention.CoT import *
 from ultralytics.nn.modules import (
     AIFI,
@@ -998,6 +1000,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             PSA,
             SCDown,
             C2fCIB,
+            MobileViTBlock,
         }:
             c1, c2 = ch[f], args[0]
             if c2 != nc:  # if c2 not equal to number of classes (i.e. for Classify() output)
@@ -1024,6 +1027,7 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
                 C2fPSA,
                 C2fCIB,
                 C2PSA,
+                MobileViTBlock,
             }:
                 args.insert(2, n)  # number of repeats
                 n = 1
@@ -1064,6 +1068,11 @@ def parse_model(d, ch, verbose=True):  # model_dict, input_channels(3)
             if c2 != nc:
                 c2 = make_divisible(min(c2, max_channels) * width, 8)
             args = [c1, *args[1:]]
+        elif m in [PatchMerging, PatchEmbed, SwinStage]:
+            c1, c2 = ch[f], args[0]
+            if c2 != nc: 
+                c2 = make_divisible(min(c2, max_channels) * width, 8)
+                args = [c1, c2, *args[1:]]     
         else:
             c2 = ch[f]
 

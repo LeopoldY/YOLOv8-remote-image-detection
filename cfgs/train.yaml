@@ -1,8 +1,8 @@
-epochs : 100
-batch : 4
+epochs : 50
+batch : 6
 imgsz : 1024
-data : ./cfgs/DOTA/train_config.yaml
-weights : runs/detect/dota_yolov8s_epochs100_CoT_Improved/weights/last.pt
-name : dota_yolov8s_epochs100_CoT_Improved
-resume : True
-workers : 6
+data : ./cfgs/dota_small/train_config.yaml
+weights : yolov8n-SwinTransformer.yaml
+name : dota_small_yolov8n_epochs100_SwinTrans
+resume : False
+workers : 4
